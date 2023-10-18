@@ -134,6 +134,87 @@ eat(jelly_bean for jelly_bean in jelly_beans if jelly_bean.color == 'black')
 
 
 
+### 4.生成器
+
+> 生成器函数就是每当它执行一次生成（yield）语句，它就返回一个迭代器，这个迭代器生成一个值。生成值后，生成器函数的运行状态将被挂起，直到下一次生成。
+
+```python
+def my_generator():
+    for i in range(5):
+        yield i
+
+# 使用生成器
+my_gen = my_generator()
+for num in my_gen:
+    print(num)
+"""
+当执行 my_gen = my_generator()时，函数 my_generator() 并不会立即执行，而是返回一个生成器对象 my_gen。
+
+第一次迭代时，调用 next(my_gen) 或直接使用 for 循环开始执行生成器。程序进入 my_generator() 函数，并执行第一次循环。在循环体内，遇到 yield 0，它将数字 0 返回给迭代器的调用者，并暂停函数的执行。此时，生成器的状态被保留，记住了程序的位置和局部变量的值。
+
+迭代器获取到了数字 0，打印出来，并继续请求下一个值。程序重新进入 my_generator() 函数，并从上次暂停的地方继续执行。这次循环中，遇到 yield 1，将数字 1 返回给迭代器，并再次暂停。
+
+迭代器获取到数字 1，打印出来，并继续请求下一个值。程序再次从上次暂停的地方继续执行，依次类推，直到生成器完成所有循环。
+
+最终生成器完成迭代，没有更多的值可供产生，迭代结束。
+
+总结来说，生成器通过 yield 的使用，将函数的执行过程分成多个阶段，每次返回一个值并暂停，等待下一次请求。这使得我们可以逐步获取结果，而不需要一次性生成或存储所有的值。
+"""
+```
+
+生成器执行方式的好处：
+
+- **节省内存**：生成器一次只生成一个值，并在需要时返回。这意味着生成器不会一次性生成或存储整个结果集，从而减少内存占用。特别适用于处理大型数据集或无限序列。
+- **惰性计算**：生成器使用惰性计算，也就是在需要时才进行计算。这样可以延迟计算复杂或耗时的操作，提高程序的性能和效率。
+- **可迭代性**：生成器对象是可迭代的，可以像列表或其他容器一样使用。我们可以使用for循环一次迭代生成器的值，或者使用next()函数逐个获取生成器的下一个值。
+- **状态保留**：生成器在每次遇到yield时暂停，并保存当前的状态。当再次调用生成器时，它可以从上次离开的地方继续执行，保留了函数内的局部变量和程序位置。这使得生成器非常灵活，可以处理需要记住先前状态的任务。
+- **简洁性**：相比手动实现迭代器的复杂性，生成器提供了一种更直观、简洁的编程方式。通过使用yield语句，我们可以将生成器视为一个特殊类型的函数，而不必编写完整的迭代器类。
+
+### 5.lambda函数
+
+> lambda arguments: expression
+>
+> 适用于单行函数，如果代码超过60-80个字符，最好还是定义成常规（嵌套）函数
+
+```python
+add = lambda x,y:x+y
+res = add(3,4)
+print(res)
+```
+
+lambda函数通常与高阶函数结合使用，例如map()、filter()、reduce()等函数，以提供更简洁的代码实现
+
+```python
+# map()函数中使用lambda函数对列表中的每个元素进行操作
+numbers=[1,2,3,4,5]
+squared_numbers=list(map(lambda x:x**2,numbers))
+print(squared_numbers) # 输出[1,4,9,16,25]
+
+# filter()函数中使用lambda函数筛选列表中的元素
+numbers=[1,2,3,4,5]
+even_numbers=list(filter(lambda x:x%2==0,numbers))
+print(even_numbers) # 输出[2,4]
+
+# 在排序函数中使用lambda函数指定自定义的排序逻辑
+names = ["Alice", "Bob", "Charlie", "Dave"]
+sorted_names = sorted(names, key=lambda x: len(x))
+print(sorted_names)  # 输出: ['Bob', 'Dave', 'Alice', 'Charlie']
+
+# 在需要传递简单函数作为参数的场景中，使用lambda函数代替命名函数
+def apply_function(func,x):
+    return func(x)
+res = apply_function(lambda x:x**2,3)
+print(res) # 输出：9
+```
+
+
+
+### 6.特性
+
+> python中数据的属性和处理数据的方法统称属性（attribute），而在不改变类接口的前提下用来修改数据属性的存取方法我们称为特性（property）。
+
+
+
 ## 代码的抽象三原则
 
 软件开发是“抽象化”原则的一种体现。“抽象化”指从具体问题中，提取出具有共性的模式，再使用通用的解决方法加以处理。
