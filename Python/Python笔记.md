@@ -212,6 +212,44 @@ print(res) # 输出：9
 ### 6.特性
 
 > python中数据的属性和处理数据的方法统称属性（attribute），而在不改变类接口的前提下用来修改数据属性的存取方法我们称为特性（property）。
+>
+
+
+
+### 7.True/False的求值
+
+> python中所有的“空”值都被认为是false，因此0，None，[]，{}都被认为是false
+>
+> 1.**对于** **None** **等单例对象测试时,** **使用** **is** **或者** **is not**. **当你要测试一个默认值是** **None** **的变量或参**
+>
+> **数是否被设为其它值.** **这个值在布尔语义下可能是** **false!**
+>
+> 2. 永远不要用 == 将一个布尔量与 false 相比较. 使用 if not x: 代替. 如果你需要区分 false 和
+>
+> None, 你应该用像 if not x and x is not None: 这样的语句.
+>
+> 3. 对于序列 (字符串, 列表, 元组), 要注意空序列是 false. 因此 if not seq: 或者 if seq: 比 if
+>
+> len(seq): 或 if not len(seq): 要更好.
+>
+> 4. 处理整数时, 使用隐式 false 可能会得不偿失 (即不小心将 None 当做 0 来处理). 你可以将一个已知
+>
+> 是整型 (且不是 len() 的返回结果) 的值与 0 比较.
+
+```python
+if not users:
+    print('no users')
+    
+if foo==0:
+    self.handle_zero()
+    
+if i%10==0:
+    self.handle_multiple_of_ten()
+    
+def f(x=None):
+    if x is None:
+        x=[]
+```
 
 
 
