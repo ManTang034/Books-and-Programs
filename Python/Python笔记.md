@@ -253,6 +253,46 @@ def f(x=None):
 
 
 
+### 8.注释
+
+**类**
+
+```python
+class SampleClass(object):
+    """Summary of class here.
+    
+    Longer class information....
+    Longer class information....
+    
+    Attributes:
+        likes_spam: A boolean indicating if we like SPAM or not.
+        eggs: An integer count of the eggs we have laid.
+    """
+    
+    def __init__(self, likes_spam=False):
+        """Inits SampleClass with blah."""
+        self.likes_spam = likes_spam
+        self.eggs = 0
+        
+    def public_method(self):
+    	"""Performs operation blah."""
+```
+
+**块注释和行注释**
+
+最需要写注释的是代码中那些技巧性的部分。如果你在下次代码审查的时候必须解释一下，那么你应该现在就给它写注释。对于复杂的操作，应该在其操作开始前写上若干行注释。对于不是一目了然的代码，应在其行尾添加注释。（为了提高可读性，注释应该至少离开代码2个空格）
+
+```python
+# We use a weighted dictionary search to find out where i is in
+# the array. We extrapolate position based on the largest num
+# in the array and the array size and then do binary search to
+# get the exact number.
+
+if i & (i-1) == 0:  # True if i is 0 or a power of 2.
+```
+
+
+
 ## 代码的抽象三原则
 
 软件开发是“抽象化”原则的一种体现。“抽象化”指从具体问题中，提取出具有共性的模式，再使用通用的解决方法加以处理。
